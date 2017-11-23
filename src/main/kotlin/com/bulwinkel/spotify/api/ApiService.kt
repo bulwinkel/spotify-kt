@@ -17,10 +17,10 @@ internal const val SPOTIFY_API_BASE_URL = "https://api.spotify.com/v1/"
 
 internal interface ApiService {
 
-  @GET("me/tracks") fun savedTracks(
-      @Header("Authorization") authHeader: String,
-      @Query("limit") limit: Int? = null,
-      @Query("offset") offset: Int? = null,
-      @Query("market") market: String? = null
-  ) : Single<PagingObject<SavedTrack>>
+    @GET("me/tracks") fun savedTracks(
+            @Header("Authorization") authHeader: String,
+            @Query("limit") limit: Int? = null,
+            @Query("offset") offset: Int? = null,
+            @Query("market") market: String? = null
+    ) : Single<PagingObject<SavedTrack>>
 }
