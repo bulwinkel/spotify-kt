@@ -1,6 +1,8 @@
 package com.bulwinkel.spotify.api
 
 import com.bulwinkel.spotify.api.internal.Base64
+import com.bulwinkel.spotify.api.models.ArtistSimplified
+import com.bulwinkel.spotify.api.models.ArtistsSearchResult
 import com.bulwinkel.spotify.api.models.PagingObject
 import com.bulwinkel.spotify.api.models.SavedTrack
 import com.bulwinkel.spotify.auth.AuthService
@@ -14,6 +16,7 @@ import okhttp3.logging.HttpLoggingInterceptor.Level.BODY
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.moshi.MoshiConverterFactory
+import retrofit2.http.Query
 
 class SpotifyApiClient(
         private val tokenSource: Single<String>
@@ -61,5 +64,19 @@ class SpotifyApiClient(
                             offset = offset,
                             market = market)
                 }
+    }
+
+    fun searchArtists(query: String,
+            market: String? = null,
+            limit: Int? = null,
+            offset: Int? = null
+    ): Single<ArtistsSearchResult> = authHeader.flatMap {
+        apiService.searchArtists(
+                authHeader = it,
+                query = query,
+                market = market,
+                limit = limit,
+                offset = offset
+        )
     }
 }
