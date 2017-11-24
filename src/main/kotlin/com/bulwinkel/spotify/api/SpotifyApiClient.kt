@@ -1,10 +1,7 @@
 package com.bulwinkel.spotify.api
 
 import com.bulwinkel.spotify.api.internal.Base64
-import com.bulwinkel.spotify.api.models.ArtistSimplified
-import com.bulwinkel.spotify.api.models.ArtistsSearchResult
-import com.bulwinkel.spotify.api.models.PagingObject
-import com.bulwinkel.spotify.api.models.SavedTrack
+import com.bulwinkel.spotify.api.models.*
 import com.bulwinkel.spotify.auth.AuthService
 import com.bulwinkel.spotify.auth.SPOTIFY_AUTH_BASE_URL
 import com.squareup.moshi.Moshi
@@ -66,7 +63,8 @@ class SpotifyApiClient(
                 }
     }
 
-    fun searchArtists(query: String,
+    fun searchArtists(
+            query: String,
             market: String? = null,
             limit: Int? = null,
             offset: Int? = null
@@ -78,5 +76,29 @@ class SpotifyApiClient(
                 limit = limit,
                 offset = offset
         )
+    }
+
+    /**
+     * Get a list of the playlists owned or followed by a Spotify user.
+     */
+    fun playlists(
+            userId: String? = null,
+            limit: Int? = null,
+            offset: Int? = null
+    ): Single<PagingObject<PlaylistSimplified>> = authHeader.flatMap { authHeader ->
+        if (userId == null || userId.isBlank()) {
+            apiService.playlists(
+                    authHeader = authHeader,
+                    limit = limit,
+                    offset = offset
+            )
+        } else {
+            apiService.playlists(
+                    authHeader = authHeader,
+                    userId = userId,
+                    limit = limit,
+                    offset = offset
+            )
+        }
     }
 }
