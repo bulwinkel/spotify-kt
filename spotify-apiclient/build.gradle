@@ -1,0 +1,33 @@
+group = 'com.github.bulwinkel'
+version = '1.0-SNAPSHOT'
+
+apply plugin: 'java-library'
+apply plugin: 'kotlin'
+
+sourceCompatibility = 1.7
+targetCompatibility = 1.7
+
+dependencies {
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+
+    implementation 'com.squareup.okio:okio:1.13.0'
+
+    final def moshiVersion = '1.4.0'
+    implementation "com.squareup.moshi:moshi:$moshiVersion"
+    //  compile "com.squareup.moshi:moshi-kotlin:$moshiVersion"
+
+    implementation 'com.squareup.okhttp3:okhttp:3.9.0'
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.9.0'
+
+    final def retrofitVersion = '2.3.0'
+    implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
+    implementation "com.squareup.retrofit2:converter-moshi:$retrofitVersion"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofitVersion"
+
+    api "io.reactivex.rxjava2:rxjava:2.1.6"
+
+    implementation 'com.bulwinkel.fire:fire-core-jvm:0.1.1'
+
+    testCompile "org.jetbrains.kotlin:kotlin-test:$kotlin_version"
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+}
