@@ -1,5 +1,5 @@
 package com.bulwinkel.spotify.api.models
 
 data class ArtistsSearchResult(
-    val artists: PagingObject<ArtistSimplified>
+    val artists: PagingObject<ArtistFull>
 )
