@@ -1,2 +1,2 @@
-include ':spotify-apiclient'
+include ':spotify-apiclient-jvm'
 
