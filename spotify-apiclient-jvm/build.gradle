@@ -1,4 +1,4 @@
-group = 'com.github.bulwinkel'
+group = 'com.github.bulwinkel.spotify-kt'
 version = '1.0-SNAPSHOT'
 
 apply plugin: 'java-library'
