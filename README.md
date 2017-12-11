@@ -1,7 +1,7 @@
 spotify-kt
 ===
 The repository contains some experimental utilities created for working with the spotify
-web api from Kotlin JVM.
+web api from Kotlin on the JVM or Android.
 
 Should you use these tools?
 ---
