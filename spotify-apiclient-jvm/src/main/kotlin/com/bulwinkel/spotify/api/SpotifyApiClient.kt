@@ -1,9 +1,9 @@
 package com.bulwinkel.spotify.api
 
-import com.bulwinkel.spotify.api.internal.Base64
-import com.bulwinkel.spotify.api.models.*
-import com.bulwinkel.spotify.auth.AuthService
-import com.bulwinkel.spotify.auth.SPOTIFY_AUTH_BASE_URL
+import com.bulwinkel.spotify.api.models.ArtistsSearchResult
+import com.bulwinkel.spotify.api.models.PagingObject
+import com.bulwinkel.spotify.api.models.PlaylistSimplified
+import com.bulwinkel.spotify.api.models.SavedTrack
 import com.squareup.moshi.Moshi
 import fire.log.Fire
 import io.reactivex.Single
@@ -13,7 +13,6 @@ import okhttp3.logging.HttpLoggingInterceptor.Level.BODY
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.moshi.MoshiConverterFactory
-import retrofit2.http.Query
 
 class SpotifyApiClient(
         private val tokenSource: Single<String>
