@@ -7,9 +7,27 @@ apply plugin: 'application'
 
 sourceCompatibility = 1.8
 
+mainClassName = "com.bulwinkel.spotify.cli.MainKt"
+
 dependencies {
+  compile project(":spotify-apiclient-jvm")
+
   compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+  compile 'com.bulwinkel.fire:fire-core-jvm:0.1.1'
   testCompile group: 'junit', name: 'junit', version: '4.12'
+}
+
+task runNoArgs (type: JavaExec, dependsOn: classes) {
+  description = "Run without any args"
+  main = "com.bulwinkel.spotify.cli.MainKt"
+  classpath = sourceSets.main.runtimeClasspath
+}
+
+task runAuthNoArgs (type: JavaExec, dependsOn: classes) {
+  description = "Run without any args"
+  main = "com.bulwinkel.spotify.cli.MainKt"
+  classpath = sourceSets.main.runtimeClasspath
+  args(["auth"])
 }
 
 compileKotlin {
