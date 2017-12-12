@@ -16,7 +16,7 @@ dependencies {
     implementation "com.squareup.moshi:moshi:$moshiVersion"
     //  compile "com.squareup.moshi:moshi-kotlin:$moshiVersion"
 
-    implementation 'com.squareup.okhttp3:okhttp:3.9.0'
+    api 'com.squareup.okhttp3:okhttp:3.9.0'
     implementation 'com.squareup.okhttp3:logging-interceptor:3.9.0'
 
     final def retrofitVersion = '2.3.0'
