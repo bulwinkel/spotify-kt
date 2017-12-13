@@ -9,8 +9,9 @@ fun main(args: Array<String>) {
     Fire.d { "args = ${args.toList()}" }
     try {
         val commandName = args.first()
-        Commands.valueOf(commandName).command.action(args.sliceArray(2 until args.size))
+        Commands.valueOf(commandName).command.action(args.sliceArray(1 until args.size))
     } catch (e: Exception) {
+        Fire.e(t = e) { "e.message = ${e.message}" }
         Commands.describe()
     }
 }
