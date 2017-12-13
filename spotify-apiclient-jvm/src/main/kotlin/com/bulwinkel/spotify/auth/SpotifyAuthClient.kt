@@ -15,7 +15,7 @@ import retrofit2.http.Field
 import retrofit2.http.Header
 
 class SpotifyAuthClient(
-        app: SpotifyApp
+        private val app: SpotifyApp
 ) {
     private val moshi: Moshi = Moshi.Builder().build()
     private val httpClient: OkHttpClient = OkHttpClient().newBuilder()
@@ -38,5 +38,11 @@ class SpotifyAuthClient(
     fun refreshToken(refreshToken: String) : Single<RefreshedToken> = authService.refreshToken(
             authHeader = basicAuthHeader,
             refreshToken = refreshToken
+    )
+
+    fun token(code: String) = authService.token(
+            authHeader = basicAuthHeader,
+            redirectUri = app.redirectUri,
+            code = code
     )
 }

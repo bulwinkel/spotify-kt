@@ -8,11 +8,17 @@ data class Token(
      * for example to Spotify Web API services.
      */
     val access_token: String,
-    /** How the access token may be used: always "Bearer". */
+    /**
+     * How the access token may be used: always "Bearer".
+     */
     val token_type: String,
-    /** A space-separated list of scopes which have been granted for this access_token */
+    /**
+     * A space-separated list of scopes which have been granted for this access_token
+     */
     val scope: String,
-    /**	The time period (in seconds) for which the access token is valid. */
+    /**
+     * The time period (in seconds) for which the access token is valid.
+     */
     val expires_in: Int,
     /**
      * A token that can be sent to the Spotify Accounts service in place of an authorization code.

@@ -1,6 +1,10 @@
 package com.bulwinkel.spotify.cli.auth
 
+import com.bulwinkel.spotify.auth.SpotifyAuthClient
+import com.bulwinkel.spotify.auth.models.SpotifyApp
 import com.bulwinkel.spotify.cli.Command
+import com.bulwinkel.spotify.cli.authCacheFile
+import com.squareup.moshi.Moshi
 import fire.log.Fire
 import okhttp3.HttpUrl
 import java.util.Scanner
@@ -15,10 +19,13 @@ object AuthCommand : Command {
     override fun action(args: Array<String>) {
         Fire.d { "AuthCommand args: ${args.toList()}" }
 
-        val code = AuthCommandArgs(args).run {
+        val parsedArgs = AuthCommandArgs(args).apply {
             Fire.d { "clientId = $clientId" }
             Fire.d { "clientSecret = $clientSecret" }
             Fire.d { "scope = $scope" }
+        }
+
+        val code = parsedArgs.run {
             promptUserForToken(
                     clientId = clientId,
                     redirectUri = redirectUri,
@@ -27,6 +34,34 @@ object AuthCommand : Command {
         }
 
         Fire.d { "authCode = $code" }
+
+        val authClient = SpotifyAuthClient(SpotifyApp(
+                clientId = parsedArgs.clientId,
+                clientSecret = parsedArgs.clientSecret,
+                redirectUri = parsedArgs.redirectUri
+        ))
+
+        val token = authClient.token(code).blockingGet()
+        val authCache = SpotifyAuthCache(
+                clientId = parsedArgs.clientId,
+                clientSecret = parsedArgs.clientSecret,
+                redirectUri = parsedArgs.redirectUri,
+                tokenType = token.token_type,
+                accessToken = token.access_token,
+                scope = token.scope,
+                // take 5 seconds from the seconds stated by the api
+                expiresAt = System.currentTimeMillis() + ((token.expires_in - 5) * 1000),
+                refreshToken = token.refresh_token
+        )
+
+        Moshi.Builder().build()
+                .adapter(SpotifyAuthCache::class.java)
+                .indent("  ")
+                .toJson(authCache)
+                .let { json ->
+                    Fire.d { "authCacheJson = $json" }
+                    authCacheFile.writeText(json)
+                }
     }
 }
 
@@ -79,14 +114,13 @@ class AuthCommandArgs(args: Array<String>) {
     val clientId by stringArg(args, readLineOrThrow("Enter Client ID:"))
     val clientSecret by stringArg(args, readLineOrThrow("Enter Client Secret:"))
     val redirectUri by stringArg(args, readLineOrThrow("Enter RedirectUri:"))
-    val scope by arg(args, { emptyList<String>() }) { it.split(",")}
+    val scope by arg(args, { emptyList<String>() }) { it.split(",") }
 }
 
 private val stringValueTransformer: (String) -> String = { it }
 
-fun stringArg(args: Array<String>, defaultValue: (argName: String) -> String) : ArgDelegate<String> {
-    return ArgDelegate(args, defaultValue, stringValueTransformer)
-}
+fun stringArg(args: Array<String>, defaultValue: (argName: String) -> String) =
+        ArgDelegate(args, defaultValue, stringValueTransformer)
 
 fun <T> arg(
         args: Array<String>,
