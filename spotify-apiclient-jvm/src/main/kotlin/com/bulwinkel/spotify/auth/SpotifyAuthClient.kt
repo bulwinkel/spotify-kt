@@ -4,7 +4,6 @@ import com.bulwinkel.internal.Base64
 import com.bulwinkel.spotify.api.models.RefreshedToken
 import com.bulwinkel.spotify.auth.models.SpotifyApp
 import com.squareup.moshi.Moshi
-import fire.log.Fire
 import io.reactivex.Single
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -19,9 +18,9 @@ class SpotifyAuthClient(
 ) {
     private val moshi: Moshi = Moshi.Builder().build()
     private val httpClient: OkHttpClient = OkHttpClient().newBuilder()
-            .addInterceptor(HttpLoggingInterceptor(HttpLoggingInterceptor.Logger {
-                Fire.d("OkHttp") { it }
-            }).setLevel(HttpLoggingInterceptor.Level.BODY))
+//            .addInterceptor(HttpLoggingInterceptor(HttpLoggingInterceptor.Logger {
+//                Fire.d("OkHttp") { it }
+//            }).setLevel(HttpLoggingInterceptor.Level.BODY))
             .build()
     private val retrofitBuilder = Retrofit.Builder()
             .client(httpClient)

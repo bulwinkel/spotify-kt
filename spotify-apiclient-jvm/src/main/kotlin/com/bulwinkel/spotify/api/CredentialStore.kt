@@ -1,7 +1,6 @@
 package com.bulwinkel.spotify.api
 
 import com.squareup.moshi.Moshi
-import fire.log.Fire
 import io.reactivex.Completable
 import io.reactivex.Single
 import io.reactivex.subjects.BehaviorSubject

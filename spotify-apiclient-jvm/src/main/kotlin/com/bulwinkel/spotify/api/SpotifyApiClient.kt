@@ -5,11 +5,8 @@ import com.bulwinkel.spotify.api.models.PagingObject
 import com.bulwinkel.spotify.api.models.PlaylistSimplified
 import com.bulwinkel.spotify.api.models.SavedTrack
 import com.squareup.moshi.Moshi
-import fire.log.Fire
 import io.reactivex.Single
 import okhttp3.OkHttpClient
-import okhttp3.logging.HttpLoggingInterceptor
-import okhttp3.logging.HttpLoggingInterceptor.Level.BODY
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.moshi.MoshiConverterFactory
@@ -20,9 +17,9 @@ class SpotifyApiClient(
 
     private val moshi: Moshi = Moshi.Builder().build()
     private val httpClient: OkHttpClient = OkHttpClient().newBuilder()
-            .addInterceptor(HttpLoggingInterceptor(HttpLoggingInterceptor.Logger {
-                Fire.d("OkHttp") { it }
-            }).setLevel(BODY))
+//            .addInterceptor(HttpLoggingInterceptor(HttpLoggingInterceptor.Logger {
+//                Fire.d("OkHttp") { it }
+//            }).setLevel(BODY))
             .build()
     private val retrofitBuilder = Retrofit.Builder()
             .client(httpClient)

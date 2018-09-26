@@ -1,4 +1,4 @@
-group = 'com.github.bulwinkel.spotify-kt'
+group = 'com.bulwinkel'
 version = '1.0-SNAPSHOT'
 
 apply plugin: 'java-library'
@@ -25,7 +25,7 @@ dependencies {
 
     api "io.reactivex.rxjava2:rxjava:2.1.6"
 
-    implementation 'com.bulwinkel.fire:fire-core-jvm:0.1.1'
+//    implementation 'com.bulwinkel.fire:fire-core-jvm:0.1.1'
 
     testCompile "org.jetbrains.kotlin:kotlin-test:$kotlin_version"
     testCompile group: 'junit', name: 'junit', version: '4.12'
