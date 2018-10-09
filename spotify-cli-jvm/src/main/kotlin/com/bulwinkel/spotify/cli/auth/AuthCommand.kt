@@ -96,7 +96,7 @@ private fun promptUserForToken(
         scanner.next()
     }
 
-    val code = actualCallbackUrl.split(delimiters = "code=").last().split(delimiters = "&").first()
+    val code = actualCallbackUrl.split("code=").last().split("&").first()
     println("code = $code")
 
     return code
