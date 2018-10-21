@@ -19,16 +19,16 @@ kotlin {
 dependencies {
   compile project(":spotify-apiclient-jvm")
 
-  compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+  compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${Deps.kotlin_version}"
   compile 'com.bulwinkel.fire:fire-core-jvm:0.1.1'
   compile 'com.squareup.okhttp3:okhttp:3.9.0'
   compile "com.squareup.moshi:moshi:1.4.0"
 
-  compile "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_version"
-  compile "org.jetbrains.kotlinx:kotlinx-serialization-runtime:$serialization_version"
-  compile "io.ktor:ktor-client-core-jvm:$ktor_version"
-  compile "io.ktor:ktor-client-okhttp:$ktor_version"
-  compile "io.ktor:ktor-client-json-jvm:$ktor_version"
+  compile "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Deps.coroutines_version}"
+  compile "org.jetbrains.kotlinx:kotlinx-serialization-runtime:${Deps.serialization_version}"
+  compile "io.ktor:ktor-client-core-jvm:${Deps.ktor_version}"
+  compile "io.ktor:ktor-client-okhttp:${Deps.ktor_version}"
+  compile "io.ktor:ktor-client-json-jvm:${Deps.ktor_version}"
 
   testCompile group: 'junit', name: 'junit', version: '4.12'
 }

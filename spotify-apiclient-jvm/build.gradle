@@ -14,28 +14,26 @@ kotlin {
 }
 
 dependencies {
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:${Deps.kotlin_version}"
 
     implementation 'com.squareup.okio:okio:1.13.0'
 
-    final def moshiVersion = '1.6.0'
-    implementation "com.squareup.moshi:moshi:$moshiVersion"
+    implementation "com.squareup.moshi:moshi:${Deps.moshiVersion}"
     //  compile "com.squareup.moshi:moshi-kotlin:$moshiVersion"
 
     implementation 'com.squareup.okhttp3:logging-interceptor:3.9.0'
 
-    final def retrofitVersion = '2.4.0'
-    implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
-    implementation "com.squareup.retrofit2:converter-moshi:$retrofitVersion"
-    implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofitVersion"
+    implementation "com.squareup.retrofit2:retrofit:${Deps.retrofitVersion}"
+    implementation "com.squareup.retrofit2:converter-moshi:${Deps.retrofitVersion}"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:${Deps.retrofitVersion}"
 
     api "io.reactivex.rxjava2:rxjava:2.1.6"
 
 //    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:0.30.2'
-    implementation "io.ktor:ktor-client-core-jvm:$ktor_version"
+    implementation "io.ktor:ktor-client-core-jvm:${Deps.ktor_version}"
 
 //    implementation 'com.bulwinkel.fire:fire-core-jvm:0.1.1'
 
-    testCompile "org.jetbrains.kotlin:kotlin-test:$kotlin_version"
+    testCompile "org.jetbrains.kotlin:kotlin-test:${Deps.kotlin_version}"
     testCompile group: 'junit', name: 'junit', version: '4.12'
 }
